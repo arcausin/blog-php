@@ -13,7 +13,7 @@ if (!empty($token)) {
         $message = "Inconnue";
         $userCreatedConfirm = false;
     } else {
-        if (User::userConfirm($token)) {
+        if (User::userMailConfirm($token)) {
             $userCreatedConfirm = true;
         } else {
             $message = "Inconnue";

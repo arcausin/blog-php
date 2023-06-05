@@ -6,7 +6,7 @@
 
 <?php ob_start(); ?>
 <h1>Homepage</h1>
-
+<?php if (!empty($_SESSION['user']['pseudonym'])) : ?><?= $_SESSION['user']['pseudonym']; ?><?php endif ?>
 <nav>
     <ul>
         <li><a href="/">Accueil</a></li>
@@ -18,11 +18,11 @@
 
 <nav>
     <ul>
-        <li><a href="/inscription">Inscription</a></li>
-        <li><a href="/connexion">Connexion</a></li>
-        <li><a href="/deconnexion">Déconnexion</a></li>
-        <li><a href="/mot-de-passe-oublie">Mot de passe oublie</a></li>
-        <li><a href="/nouveau-mot-de-passe">Nouveau mot de passe</a></li>
+        <?php if (empty($_SESSION['user'])) : ?>
+            <li><a href="/connexion">Se connecter</a></li>
+            <li><a href="/inscription">S'inscrire</a></li>
+        <?php endif ?>
+        <?php if (!empty($_SESSION['user'])) : ?><li><a href="/deconnexion">Déconnexion</a></li><?php endif ?>
     </ul>
 </nav>
 

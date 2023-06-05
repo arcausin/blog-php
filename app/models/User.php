@@ -56,6 +56,32 @@ class User
         return $statement->fetch();
     }
 
+    public static function getUserByEMail(string $email): array
+    {
+        $database = dbConnect();
+
+        $statement = $database->prepare(
+            "SELECT * FROM users WHERE mail_adress = :mail_adress"
+        );
+        $statement->bindParam(':mail_adress', $email, \PDO::PARAM_STR);
+        $statement->execute();
+
+        return $statement->fetch();
+    }
+
+    public static function getUserByResetPasswordToken(string $resetPasswordToken): array
+    {
+        $database = dbConnect();
+
+        $statement = $database->prepare(
+            "SELECT * FROM users WHERE reset_password_token = :reset_password_token"
+        );
+        $statement->bindParam(':reset_password_token', $resetPasswordToken, \PDO::PARAM_STR);
+        $statement->execute();
+
+        return $statement->fetch();
+    }
+
     public static function userPseudoExists(string $pseudo): int
     {
         $database = dbConnect();
@@ -95,7 +121,20 @@ class User
         return $statement->fetchColumn();
     }
 
-    public static function userConfirm(string $token): int
+    public static function userResetPasswordTokenExists(string $resetPasswordToken): int
+    {
+        $database = dbConnect();
+
+        $statement = $database->prepare(
+            "SELECT COUNT(*) FROM users WHERE reset_password_token = :reset_password_token"
+        );
+        $statement->bindParam(':reset_password_token', $resetPasswordToken, \PDO::PARAM_STR);
+        $statement->execute();
+
+        return $statement->fetchColumn();
+    }
+
+    public static function userMailConfirm(string $token): int
     {
         $database = dbConnect();
 
@@ -103,6 +142,20 @@ class User
             "UPDATE users SET role = 1, token = NULL, token_creation_date = NULL WHERE token = :token"
         );
         $statement->bindParam(':token', $token, \PDO::PARAM_STR);
+        $statement->execute();
+
+        return $statement->rowCount();
+    }
+
+    public static function addResetPasswordToken(string $email, string $token): int
+    {
+        $database = dbConnect();
+
+        $statement = $database->prepare(
+            "UPDATE users SET reset_password_token = :reset_password_token, reset_password_token_creation_date = NOW() WHERE mail_adress = :mail_adress"
+        );
+        $statement->bindParam(':reset_password_token', $token, \PDO::PARAM_STR);
+        $statement->bindParam(':mail_adress', $email, \PDO::PARAM_STR);
         $statement->execute();
 
         return $statement->rowCount();
@@ -119,6 +172,20 @@ class User
         $statement->bindParam(':mail_adress', $this->email, \PDO::PARAM_STR);
         $statement->bindParam(':password', $this->password, \PDO::PARAM_STR);
         $statement->bindParam(':token', $this->token, \PDO::PARAM_STR);
+        $statement->execute();
+
+        return $statement->rowCount();
+    }
+
+    public static function updatePassword(string $id, string $password): int
+    {
+        $database = dbConnect();
+
+        $statement = $database->prepare(
+            "UPDATE users SET password = :password, reset_password_token = NULL, reset_password_token_creation_date = NULL WHERE id = :id"
+        );
+        $statement->bindParam(':password', $password, \PDO::PARAM_STR);
+        $statement->bindParam(':id', $id, \PDO::PARAM_INT);
         $statement->execute();
 
         return $statement->rowCount();

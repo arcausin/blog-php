@@ -1,16 +1,16 @@
-<?php $title = "Inscription - " . ucfirst($host); ?>
+<?php $title = "Connexion - " . ucfirst($host); ?>
 
-<?php $description = "S'inscrire sur le site - " . ucfirst($host); ?>
+<?php $description = "Se connecter sur le site - " . ucfirst($host); ?>
 
 <?php $image = $urlNative . "/public/img/logo.png"; ?>
 
 <?php ob_start(); ?>
-<h1>Inscription</h1>
+<h1>Connexion</h1>
 
-<?php if (isset($userCreated)) : ?>
-    <?php if ($userCreated == false && !empty($message)) : ?>
+<?php if (isset($userConnected)) : ?>
+    <?php if ($userConnected == false && !empty($message)) : ?>
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <strong>Création du compte échoué !<br/>
+            <strong>Connexion échoué !<br/>
             Erreur</strong> : <?= $message; ?>
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
@@ -21,25 +21,19 @@
 
 <form class="row g-3 mb-3" action="" method="post">
     <div class="col-6">
-        <input type="text" class="form-control" id="pseudo" name="pseudo" maxlength="32" placeholder="Pseudo" value="<?php if (!empty($_POST['pseudo'])) : ?><?= $_POST['pseudo']; ?><?php endif ?>" required>
-    </div>
-    <div class="col-6">
         <input type="email" class="form-control" id="email" name="email" maxlength="64" placeholder="Adresse Mail" value="<?php if (!empty($_POST['email'])) : ?><?= $_POST['email']; ?><?php endif ?>" required>
     </div>
-
     <div class="col-6">
         <input type="password" class="form-control" id="password" name="password" maxlength="64" placeholder="Mot de passe" required>
     </div>
-    <div class="col-6">
-        <input type="password" class="form-control" id="password_confirm" name="password_confirm" maxlength="64" placeholder="Confirmation du mot de passe" required>
-    </div>
 
     <div class="col- text-center">
-        <button type="submit" class="btn btn-primary" name="createUserSubmit">Créer un compte</button>
+        <button type="submit" class="btn btn-primary" name="loginUserSubmit">Se connecter</button>
     </div>
 
     <div class="col-">
-        <a class="btn btn-primary" href="/connexion">Se connecter</a>
+        <a class="btn btn-primary" href="/mot-de-passe-oublie">Mot de passe oublié ?</a>
+        <a class="btn btn-primary" href="/inscription">Créer un compte</a>
     </div>
 </form>
 

@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 $url[0] = '';
 
 if (isset($_GET['url'])) {
@@ -76,6 +78,19 @@ elseif (!empty($url[0])) {
     elseif ($url[0] == 'confirmation-inscription' && !empty($url[1]) && empty($url[2])) {
         $token = $url[1];
         require_once(__DIR__.'/app/controllers/confirmation-register.php');
+    }
+    elseif ($url[0] == 'connexion' && empty($url[1])) {
+        require_once(__DIR__.'/app/controllers/login.php');
+    }
+    elseif ($url[0] == 'deconnexion' && empty($url[1])) {
+        require_once(__DIR__.'/app/controllers/logout.php');
+    }
+    elseif ($url[0] == 'mot-de-passe-oublie' && empty($url[1])) {
+        require_once(__DIR__.'/app/controllers/forgot-password.php');
+    }
+    elseif ($url[0] == 'nouveau-mot-de-passe' && !empty($url[1]) && empty($url[2])) {
+        $resetPasswordToken = $url[1];
+        require_once(__DIR__.'/app/controllers/new-password.php');
     }
 
     else {
