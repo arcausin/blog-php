@@ -18,15 +18,21 @@ if (Article::ArticleSlugExists($slug)) {
     $articleDelete->id = $article['id'];
 
     if (isset($_POST['deleteArticleSubmit'])) {
-        if ($articleDelete->deleteArticle()) {
-            unlink(__DIR__.'/../../../public/img/articles/'.$article['illustration']);
-            $articleDeleted = true;
-            header('Location: /administration/articles');
-            exit();
-        } else {
-            $message = "Inconnue";
+        if ($article['validate'] !== 0 || $article['visible'] !== 0) {
+            $message = "Vous ne pouvez pas supprimer un article validé et ou visible";
             $articleDeleted = false;
+        } else {
+            if ($articleDelete->deleteArticle()) {
+                unlink(__DIR__.'/../../../public/img/articles/'.$article['illustration']);
+                $articleDeleted = true;
+                header('Location: /administration/articles');
+                exit();
+            } else {
+                $message = "Inconnue";
+                $articleDeleted = false;
+            }
         }
+        
     }
 
     require_once(__DIR__.'/../../views/articles/delete.php');

@@ -109,27 +109,26 @@ class Functions
     public static function validationInput($data) {
         $data = trim($data);
         $data = stripslashes($data);
+
+        $data = strip_tags($data);
         $data = htmlspecialchars($data, ENT_QUOTES, 'UTF-8');
         return $data;
     }
 
-    public static function validationContentsArticle($data) {
+    public static function PrintInput($data) {
+        return htmlspecialchars_decode($data, ENT_QUOTES);
+    }
+
+    public static function validationContentArticle($data) {
         $data = trim($data);
         $data = stripslashes($data);
+
         $data = strip_tags($data, '<h1><h2><h3><h4><h5><h6><p><a><img><strong><em><i><u><b><s><ul><ol><li><blockquote><code><pre><hr><br><span><div><iframe>');
         $data = htmlspecialchars($data, ENT_HTML5, 'UTF-8');
         return $data;
     }
 
-    public static function PrintContentsArticle($data) {
-        return html_entity_decode($data, ENT_HTML5, 'UTF-8');
-    }
-
-    public static function printDescription($data) {
-        $data = strip_tags($data);
-        $data = substr($data, 0, 150);
-        $data = $data . '...';
-      
-        return $data;
+    public static function PrintContentArticle($data) {
+        return htmlspecialchars_decode($data, ENT_HTML5);
     }
 }

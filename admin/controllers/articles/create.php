@@ -5,25 +5,28 @@ use Admin\Models\Article;
 use Admin\Functions;
 
 if (isset($_POST['addArticleSubmit'])) {
-    $title = Functions::validationInput($_POST['title']);
-    $slug = Functions::slugify($_POST['slug']);
-    $slug = Functions::validationInput($slug);
-    $subtitle = Functions::validationContentsArticle($_POST['subtitle']);
-    $content = Functions::validationContentsArticle($_POST['content']);
+    $titleArticle = Functions::validationInput($_POST['title']);
+    $slugArticle = Functions::slugify($_POST['slug']);
+    $slugArticle = Functions::validationInput($slugArticle);
+    $subtitleArticle = Functions::validationInput($_POST['subtitle']);
+    $contentArticle = Functions::validationContentArticle($_POST['content']);
 
-    if (empty($title)) {
+    if (empty($titleArticle)) {
         $message = "Veuillez ajouter un titre à l'article";
         $articleCreated = false;
-    } elseif (empty($slug)) {
+    } elseif (empty($slugArticle)) {
         $message = "Veuillez ajouter un slug à l'article";
         $articleCreated = false;
-    } elseif (Article::ArticleSlugExists($slug) != 0) {
+    } elseif (Article::ArticleSlugExists($slugArticle) != 0) {
         $message = "Le slug existe déjà";
         $articleCreated = false;
-    } elseif (empty($subtitle)) {
+    } elseif (empty($subtitleArticle)) {
         $message = "Veuillez ajouter un sous-titre à l'article";
         $articleCreated = false;
-    } elseif (empty($content)) {
+    } elseif (mb_strlen($subtitleArticle, 'UTF-8') > 255) {
+        $message = "Veuillez ajouter un sous-titre à l'article avec un maximum de 255 caractères (actuellement ".mb_strlen($subtitleArticle, 'UTF-8').")";
+        $articleCreated = false;
+    } elseif (empty($contentArticle)) {
         $message = "Veuillez ajouter un contenu à l'article";
         $articleCreated = false;
     } elseif (empty($_FILES['illustration']['name'])) {
@@ -38,18 +41,18 @@ if (isset($_POST['addArticleSubmit'])) {
                 $folder = __DIR__.'/../../../public/img/articles/';
 
                 $extension = Functions::checkImageTypeUploadFile($_FILES['illustration']);
-                $illustration = Functions::makeIdPublic() . $extension;
-                move_uploaded_file($_FILES['illustration']['tmp_name'], $folder . $illustration);
+                $illustrationArticle = Functions::makeIdPublic() . $extension;
+                move_uploaded_file($_FILES['illustration']['tmp_name'], $folder . $illustrationArticle);
 
-                $authorId = $_SESSION['user']['id'];
+                $authorArticle = $_SESSION['user']['id'];
 
                 $article = new Article(
-                    $authorId,
-                    $title,
-                    $illustration,
-                    $subtitle,
-                    $content,
-                    $slug
+                    $authorArticle,
+                    $titleArticle,
+                    $illustrationArticle,
+                    $subtitleArticle,
+                    $contentArticle,
+                    $slugArticle
                 );
                 
                 if ($article->addArticle()) {

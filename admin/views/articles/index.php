@@ -19,7 +19,7 @@
         <div class="col-6">
             <a class="text-decoration-none text-white" href="/administration/articles/<?= $article['slug']; ?>">
                 <div class="position-relative">
-                    <img class="shadow img-fluid rounded-4" src="/public/img/articles/<?= $article['illustration']; ?>" alt="" style="filter: brightness(0.85);">
+                    <img class="shadow img-fluid w-100 rounded-4" src="/public/img/articles/<?= $article['illustration']; ?>" alt="" style="filter: brightness(0.85);">
                     <div class="p-3 position-absolute bottom-0">
                         <h3 class="mb-0 fs-4"><?= $article['title']; ?></h3>
                     </div>

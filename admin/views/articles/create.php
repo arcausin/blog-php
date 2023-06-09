@@ -29,12 +29,12 @@
 <form class="row g-3 mb-3" action="" method="post" enctype="multipart/form-data">
     <div class="col-6">
         <label for="title">Titre</label>
-        <input type="text" class="form-control" id="title" name="title" maxlength="255" placeholder="Titre de l'article" value="<?php if (!empty($_POST['title'])) : ?><?= $_POST['title']; ?><?php endif ?>" required>
+        <input type="text" class="form-control" id="title" name="title" maxlength="255" placeholder="Titre de l'article" value="<?php if (!empty($titleArticle)) : ?><?= $titleArticle; ?><?php endif ?>" required>
     </div>
 
     <div class="col-6">
         <label for="title">Slug</label>
-        <input type="text" class="form-control" id="slug" name="slug" maxlength="255" placeholder="Slug de l'article" value="<?php if (!empty($_POST['slug'])) : ?><?= $_POST['slug']; ?><?php endif ?>" required>
+        <input type="text" class="form-control" id="slug" name="slug" maxlength="255" placeholder="Slug de l'article" value="<?php if (!empty($slugArticle)) : ?><?= $slugArticle; ?><?php endif ?>" required>
     </div>
 
     <div class="form-group">
@@ -48,12 +48,12 @@
 
     <div class="col-6">
         <label for="subtitle">Sous-titre</label>
-        <textarea class="form-control" id="subtitle" name="subtitle" rows="5"><?php if (!empty($_POST['subtitle'])) : ?><?= $_POST['subtitle']; ?><?php endif ?></textarea>
+        <textarea class="form-control" id="subtitle" name="subtitle"><?php if (!empty($subtitleArticle)) : ?><?= $subtitleArticle; ?><?php endif ?></textarea>
     </div>
 
     <div class="col-6">
         <label for="content">Contenu</label>
-        <textarea class="form-control" id="content" name="content" rows="5"><?php if (!empty($_POST['content'])) : ?><?= $_POST['content']; ?><?php endif ?></textarea>
+        <textarea class="form-control" id="content" name="content"><?php if (!empty($contentArticle)) : ?><?= $contentArticle; ?><?php endif ?></textarea>
     </div>
 
     <div class="col- text-center">
@@ -73,13 +73,18 @@
     tinymce.init({
     selector: '#subtitle',
     language: 'fr_FR',
+    encoding: "UTF-8",
+    entity_encoding : "raw",
     plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
     toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
+    height : 250,
     });
 
     tinymce.init({
     selector: '#content',
     language: 'fr_FR',
+    encoding: "UTF-8",
+    entity_encoding : "raw",
     plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
     toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
     });

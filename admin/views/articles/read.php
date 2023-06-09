@@ -20,13 +20,13 @@ use Admin\Functions;
     <div class="col-8">
         <h3 class="mb-3"><strong><?= $article['title']; ?></strong></h3>
 
-        <img class="shadow img-fluid rounded-4 mb-3" src="/public/img/articles/<?= $article['illustration']; ?>" alt="" style="filter: brightness(0.85);">
+        <img class="shadow img-fluid w-100 rounded-4 mb-3" src="/public/img/articles/<?= $article['illustration']; ?>" alt="" style="filter: brightness(0.85);">
 
-        <p class="mb-3"><?= Functions::PrintContentsArticle($article['subtitle']); ?></p>
+        <p class="mb-3"><?= Functions::PrintContentArticle($article['subtitle']); ?></p>
 
         <hr>
 
-        <p class="mb-3"><?= Functions::PrintContentsArticle($article['content']); ?></p>
+        <p class="mb-3"><?= Functions::PrintContentArticle($article['content']); ?></p>
     </div>
 
     <div class="col-4">
