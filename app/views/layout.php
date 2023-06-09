@@ -40,7 +40,56 @@
 </head>
 <body>
     <main class="container">
+        <p class="mt-3 mb-3"><?php if (!empty($_SESSION['user']['pseudonym'])) : ?><?= "connecté en tant que : ".$_SESSION['user']['pseudonym']; ?><?php endif ?></p>
+
+        <nav class="navbar navbar-expand-md navbar-light bg-light mb-3">
+            <div class="container">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/">Accueil</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/a-propos">À Propos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/articles">Articles</a>
+                        </li>
+
+                        <?php if (empty($_SESSION['user'])) : ?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/connexion">Se connecter</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/inscription">S'inscrire</a>
+                        </li>
+                        <?php endif ?>
+
+                        <?php if (!empty($_SESSION['user'])) : ?>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/mon-compte">Mon compte</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/deconnexion">Déconnexion</a>
+                            </li>
+                        <?php endif ?>
+                    </ul>
+                </div>
+            </div>
+        </nav>
         <?= $content; ?>
+        <nav>
+            <ul>
+                <li><a href="/mentions-legales">Mentions légales</a></li>
+                <li><a href="/politique-de-confidentialite">Politique de confidentialité</a></li>
+                <li><a href="/contact">Contact</a></li>
+            </ul>
+        </nav>
+
+        <h2><a href="/administration">Tableau de bord</a></h2>
     </main>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 </body>

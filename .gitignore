@@ -1,3 +1,5 @@
+/public/img/articles
+
 /vendor
 /config/database.php
 /config/apiKeys.php
