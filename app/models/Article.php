@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-require __DIR__ . '/../../config/database.php';
+require_once __DIR__ . '/../../config/database.php';
 
 class Article
 {
@@ -37,7 +37,7 @@ class Article
         $database = dbConnect();
 
         $statement = $database->prepare(
-            "SELECT * FROM articles ORDER BY creation_date DESC"
+            "SELECT * FROM articles WHERE validate = 1 AND visible = 1 ORDER BY creation_date DESC"
         );
         $statement->execute();
 
