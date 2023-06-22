@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Article;
 use App\Functions;
 
  $title = "Articles - " . ucfirst($host); ?>
@@ -9,18 +10,30 @@ use App\Functions;
 <?php $image = $urlNative . "/public/img/logo.png"; ?>
 
 <?php ob_start(); ?>
-<h3>Liste des articles</h3>
+<p class="mb-3"><a class="text-dark" href="/">Accueil</a> > Articles</p>
+
+<h1 class="text-center mb-3">ARTICLES</h1>
 
 <div class="row g-4 mb-3">
-    <?php foreach ($articles as $article) { ?>
+    <?php foreach ($articles as $article) {
+        $author = Article::getAuthorByArticle($article['slug']);
+        ?>
         <div class="col-12 col-md-6">
-            <div class="position-relative mb-2">
-                <img class="shadow img-fluid w-100 rounded" src="/public/img/articles/<?= $article['illustration']; ?>" alt="" style="filter: brightness(0.85);">
-                <div class="p-3 position-absolute bottom-0">
-                    <h3 class="mb-0 fs-4 text-white"><?= $article['title']; ?></h3>
+            <a class="text-decoration-none" href="/articles/<?= $article['slug']; ?>">
+                <div class="position-relative mb-2">
+                    <img class="shadow img-fluid w-100 rounded" src="/public/img/articles/<?= $article['illustration']; ?>" alt="" style="filter: brightness(0.85);">
+                    <div class="p-3 position-absolute bottom-0">
+                        <h3 class="mb-2 fs-5 text-white"><?= $article['title']; ?></h3>
+
+                        <?php if ($article['update_date']) : ?>
+                        <p class="mb-0 text-white">Le <?= Functions::creationDateLittleEndian($article['update_date']); ?> Par <?= $author['pseudonym']; ?></p>
+                        <?php else : ?>
+                        <p class="mb-0 text-white">Le <?= Functions::creationDateLittleEndian($article['creation_date']); ?> Par <?= $author['pseudonym']; ?></p>
+                        <?php endif ?>
+                    </div>
                 </div>
-            </div>
-            <p><?= Functions::printInput(Functions::PrintContentArticle($article['subtitle'])); ?> <a class="text-decoration-none" href="/articles/<?= $article['slug']; ?>">Lire la suite</a></p>
+                <p class="text-dark mb-0"><?= Functions::printInput(Functions::PrintContentArticle($article['subtitle'])); ?></p>
+            </a>
         </div>
     <?php } ?>
 </div>

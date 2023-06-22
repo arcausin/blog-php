@@ -4,6 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 
     <!-- Search Engine -->
     <meta name="description" content="<?= $description; ?>">
@@ -37,60 +39,87 @@
     <?php ; } ?>
     
     <title><?= $title; ?></title>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            let windowHeight = window.innerHeight;
+
+            let headerHeight = document.querySelector("#header-content").offsetHeight;
+
+            let footerHeight = document.querySelector("#footer-content").offsetHeight;
+
+            let bodyHeight = windowHeight - footerHeight;
+
+            // Ajouter la hauteur de la barre de navigation au "padding-top" du conteneur de contenu
+            document.querySelector("#main-content").style.paddingTop = headerHeight + "px";
+            document.querySelector("#main-content").style.minHeight = bodyHeight + "px";
+        });
+    </script>
 </head>
 <body>
-    <main class="container">
-        <p class="mt-3 mb-3"><?php if (!empty($_SESSION['user']['pseudonym'])) : ?><?= "connecté en tant que : ".$_SESSION['user']['pseudonym']; ?><?php endif ?></p>
-
-        <nav class="navbar navbar-expand-md navbar-light bg-light mb-3">
+    <header class="fixed-top" id="header-content">
+        <nav class="container!fluid navbar navbar-expand-md navbar-light bg-light mb-3">
             <div class="container">
+                <a class="navbar-brand" href="/">
+                    <img src="/public/img/logo.svg" alt="Logo" width="30" height="30" class="d-inline-block align-text-top">
+                Alexis D'Ambrosio
+                </a>
+
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link" href="/">Accueil</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/a-propos">À Propos</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/articles">Articles</a>
-                        </li>
 
-                        <?php if (empty($_SESSION['user'])) : ?>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="/connexion">Se connecter</a>
+                            <a class="nav-link ps-0" href="/"><u>À Propos</u></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/inscription">S'inscrire</a>
+                            <a class="nav-link" href="/articles"><u>Articles</u></a>
                         </li>
-                        <?php endif ?>
 
                         <?php if (!empty($_SESSION['user'])) : ?>
                             <li class="nav-item">
-                                <a class="nav-link" href="/mon-compte">Mon compte</a>
+                                <a class="nav-link pe-0" href="/deconnexion">Déconnexion</a>
+                            </li>
+                            <?php else : ?>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/connexion">Se connecter</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="/deconnexion">Déconnexion</a>
+                                <a class="nav-link pe-0" href="/inscription">S'inscrire</a>
                             </li>
                         <?php endif ?>
                     </ul>
                 </div>
             </div>
         </nav>
-        <?= $content; ?>
-        <nav>
-            <ul>
-                <li><a href="/mentions-legales">Mentions légales</a></li>
-                <li><a href="/politique-de-confidentialite">Politique de confidentialité</a></li>
-                <li><a href="/contact">Contact</a></li>
-            </ul>
-        </nav>
+    </header>
 
-        <h2><a href="/administration">Tableau de bord</a></h2>
+    <main class="container" id="main-content">
+        <?php if(!empty($_SESSION['user']['pseudonym'])) : ?>
+            <p class="mb-3">Connecté en tant que : <strong><?= $_SESSION['user']['pseudonym']; ?></strong></p>
+        <?php endif ?>
+        
+        <?= $content; ?>
+        
     </main>
+
+    <footer id="footer-content">
+        <div class="container">
+            <div class="text-center py-3">
+                <p class="mb-3">ME SUIVRE</p>
+                <span><a href="https://github.com/arcausin" target="_blank"><i class="fab fa-github fs-2 ms-2 text-dark"></i></a></span>
+                <span><a href="https://www.linkedin.com/in/alexisdambrosio/" target="_blank"><i class="fab fa-linkedin fs-2 ms-2 text-dark"></i></a></span>
+        
+                <hr>
+
+                <p><?php if(isset($_SESSION['user']) && $_SESSION['user']['role'] == 2) : ?>
+                    <a class="text-dark" href="/administration">Tableau de bord</a> | <?php endif ?><a class="text-dark" href="/mentions-legales">Mentions légales</a> | <a class="text-dark" href="/politique-de-confidentialite">Politique de confidentialité</a> | <a class="text-dark" href="/contact">Contact</a></p>
+                <p class="fs-4"><a class="text-decoration-none text-dark" href="/"><?= ucfirst($host); ?></a></p>
+            </div>
+        </div>
+    </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 </body>
 </html>
