@@ -40,6 +40,16 @@
     
     <title><?= $title; ?></title>
 
+    <style>
+        .shadow-top {
+            box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
+        }
+
+        .shadow-bottom {
+            box-shadow: 0 -.5rem 1rem rgba(0,0,0,.15);
+        }
+    </style>
+
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             let windowHeight = window.innerHeight;
@@ -57,12 +67,12 @@
     </script>
 </head>
 <body>
-    <header class="fixed-top" id="header-content">
-        <nav class="container!fluid navbar navbar-expand-md navbar-light bg-light mb-3">
+    <header class="shadow-top fixed-top" id="header-content">
+        <nav class="container-fluid navbar navbar-expand-md navbar-light bg-light">
             <div class="container">
-                <a class="navbar-brand" href="/">
-                    <img src="/public/img/logo.svg" alt="Logo" width="30" height="30" class="d-inline-block align-text-top">
-                Alexis D'Ambrosio
+                <a class="navbar-brand d-flex align-items-center" href="/">
+                    <img src="/public/img/logo.svg" alt="Logo" width="46" height="36.65" class="d-inline-block align-text-top me-2">
+                    <span>Alexis D'Ambrosio</span>
                 </a>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -98,14 +108,17 @@
 
     <main class="container" id="main-content">
         <?php if(!empty($_SESSION['user']['pseudonym'])) : ?>
-            <p class="mb-3">Connecté en tant que : <strong><?= $_SESSION['user']['pseudonym']; ?></strong></p>
+            <p class="mt-3 mb-3">Connecté en tant que : <strong><?= $_SESSION['user']['pseudonym']; ?></strong></p>
+        <?php else : ?>
+            <div class="mt-3"></div>
         <?php endif ?>
         
         <?= $content; ?>
-        
+
+        <div class="mb-3"></div>
     </main>
 
-    <footer id="footer-content">
+    <footer class="shadow-bottom" id="footer-content">
         <div class="container">
             <div class="text-center py-3">
                 <p class="mb-3">ME SUIVRE</p>
