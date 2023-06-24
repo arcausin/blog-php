@@ -15,8 +15,8 @@ if (Article::ArticleSlugExists($slug)) {
             $message = "Veuillez ajouter un commentaire à l'article";
             $CommentArticleCreated = false;
         }
-        elseif (mb_strlen($commentArticle, 'UTF-8') > 255) {
-            $message = "Veuillez ajouter un sous-titre à l'article avec un maximum de 255 caractères (actuellement ".mb_strlen($commentArticle, 'UTF-8').")";
+        elseif (mb_strlen($commentArticle, 'UTF-8') > 500) {
+            $message = "Veuillez ajouter un commentaire avec un maximum de 500 caractères (actuellement ".mb_strlen($commentArticle, 'UTF-8').")";
             $articleCreated = false;
         } else {
             $authorCommentArticle = $_SESSION['user']['id'];
@@ -101,6 +101,7 @@ if (Article::ArticleSlugExists($slug)) {
     
     $author = Article::getAuthorByArticle($slug);
     $comments = Comment::getCommentsByArticle($slug);
+    $lastArticles = Article::getLastArticles($slug, 2);
 
     // Only an admin can see all the comments not validate
     if (isset($_SESSION['user']) && $_SESSION['user']['role'] == 2) {

@@ -44,6 +44,20 @@ class Article
         return $statement->fetchAll();
     }
 
+    public static function getLastArticles(string $slug, int $limit): array
+    {
+        $database = dbConnect();
+
+        $statement = $database->prepare(
+            "SELECT * FROM articles WHERE validate = 1 AND visible = 1 AND slug != :slug ORDER BY creation_date DESC LIMIT :limit"
+        );
+        $statement->bindParam(':slug', $slug, \PDO::PARAM_STR);
+        $statement->bindParam(':limit', $limit, \PDO::PARAM_INT);
+        $statement->execute();
+
+        return $statement->fetchAll();
+    }
+
     public static function getArticle(string $slug): array
     {
         $database = dbConnect();

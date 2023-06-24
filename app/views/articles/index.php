@@ -21,9 +21,9 @@ use App\Functions;
         <div class="col-12 col-md-6">
             <a class="text-decoration-none" href="/articles/<?= $article['slug']; ?>">
                 <div class="position-relative mb-2">
-                    <img class="shadow img-fluid w-100 rounded" src="/public/img/articles/<?= $article['illustration']; ?>" alt="" style="filter: brightness(0.85);">
+                    <img class="shadow img-fluid w-100 rounded-4" src="/public/img/articles/<?= $article['illustration']; ?>" alt="" style="filter: brightness(0.85);">
                     <div class="p-3 position-absolute bottom-0">
-                        <h3 class="mb-2 fs-5 text-white"><?= $article['title']; ?></h3>
+                        <h2 class="mb-2 fs-4 text-white"><?= $article['title']; ?></h2>
 
                         <?php if ($article['update_date']) : ?>
                         <p class="mb-0 text-white">Le <?= Functions::creationDateLittleEndian($article['update_date']); ?> Par <?= $author['pseudonym']; ?></p>

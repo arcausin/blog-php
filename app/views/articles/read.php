@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Article;
 use App\Models\Comment;
 use App\Functions;
 
@@ -10,10 +11,10 @@ $title = $article['title'] . " - " . ucfirst($host); ?>
 <?php $image = $urlNative . "/public/img/logo.png"; ?>
 
 <?php ob_start(); ?>
-<p class="mb-3"><a class="text-dark" href="/">Accueil</a> > <a class="text-dark" href="/articles">Articles</a> > <?= $article['title']; ?></p>
-
 <div class="row">
     <div class="col-12 col-lg-8">
+        <p class="mb-3"><a class="text-dark" href="/">Accueil</a> > <a class="text-dark" href="/articles">Articles</a> > <?= $article['title']; ?></p>
+
         <h1 class="mb-3"><?= $article['title']; ?></h1>
 
         <div class="mb-3">
@@ -128,7 +129,54 @@ $title = $article['title'] . " - " . ucfirst($host); ?>
             </div>
         <?php } ?>
     </div>
-    
+
+    <div class="col-12 col-lg-4">
+        <div class="row">
+            <div class="col-12 offset-md-2 col-md-8 offset-lg-0 col-lg-12">
+                <div class="rounded-4 shadow p-3 mb-3">
+                    <div class="row d-flex align-items-center">
+                        <div class="col-4">
+                            <img src="/public/img/logo.svg" alt="Logo" class="img-fluid">
+                        </div>
+
+                        <div class="col-8">
+                            <strong class="mb-2">Alexis D'Ambrosio</strong>
+                            <p class="mb-2"><i>Développeur Web PHP</i></p>
+                            <div class="mb-0">
+                                <span><a href="https://github.com/arcausin" target="_blank"><i class="fab fa-github fs-2 ms-2 text-dark"></i></a></span>
+                                <span><a href="https://www.linkedin.com/in/alexisdambrosio/" target="_blank"><i class="fab fa-linkedin fs-2 ms-2 text-dark"></i></a></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <h3 class="mb-3">À lire aussi</h3>
+
+        <div class="row">
+            <?php foreach ($lastArticles as $lastArticle) {
+                $author = Article::getAuthorByArticle($lastArticle['slug']);
+                ?>
+                <div class="col-12 col-md-6 col-lg-12 mb-3">
+                    <a class="text-decoration-none" href="/articles/<?= $lastArticle['slug']; ?>">
+                        <div class="position-relative">
+                            <img class="shadow img-fluid w-100 rounded-4" src="/public/img/articles/<?= $lastArticle['illustration']; ?>" alt="" style="filter: brightness(0.85);">
+                            <div class="p-3 position-absolute bottom-0">
+                                <h2 class="mb-2 fs-4 text-white"><?= $lastArticle['title']; ?></h2>
+
+                                <?php if ($lastArticle['update_date']) : ?>
+                                <p class="mb-0 text-white">Le <?= Functions::creationDateLittleEndian($lastArticle['update_date']); ?> Par <?= $author['pseudonym']; ?></p>
+                                <?php else : ?>
+                                <p class="mb-0 text-white">Le <?= Functions::creationDateLittleEndian($lastArticle['creation_date']); ?> Par <?= $author['pseudonym']; ?></p>
+                                <?php endif ?>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            <?php } ?>
+        </div>
+    </div>
 </div>
 <?php $content = ob_get_clean(); ?>
 
