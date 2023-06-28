@@ -5,16 +5,7 @@ use Admin\Functions;
  $title = "Supprimer un article - " . ucfirst($host); ?>
 
 <?php ob_start(); ?>
-<h1>Tableau de bord</h1>
-<ul>
-    <li><a href="/administration/articles">Articles</a></li>
-    <li><a href="/administration/commentaires">Commentaires</a></li>
-</ul>
-<h2><a href="/">Retourner sur le site web</a></h2>
-<hr>
-<div class="mb-2">
-    <a href="/administration/articles">Retourner sur la liste des articles</a>
-</div>
+<p class="mb-3"><a class="text-dark" href="/administration">Tableau de bord</a> > <a class="text-dark" href="/administration/articles">Articles</a> > <a class="text-dark" href="/administration/articles/<?= $article['slug']; ?>"><?= $article['title']; ?></a> > Supprimer</p>
 
 <?php if (isset($articleDeleted)) : ?>
     <?php if ($articleDeleted == false && !empty($message)) : ?>
@@ -31,7 +22,7 @@ use Admin\Functions;
 <h3 class="text-danger mb-3">Suppression de l'article</h3>
 
 <form class="row mb-3" action="" method="post" enctype="multipart/form-data">
-    <div class="col-8">
+    <div class="col-12 col-lg-8">
         <h3><strong><?= $article['title']; ?></strong></h3>
         <img class="shadow img-fluid w-100 rounded-4 mb-2" src="/public/img/articles/<?= $article['illustration']; ?>" alt="">
         
@@ -42,7 +33,7 @@ use Admin\Functions;
         <p class="mb-2"><?= Functions::PrintContentArticle($article['content']); ?></p>
     </div>
 
-    <div class="col-4 text-center">
+    <div class="col-12 col-lg-4 text-center">
         <?php if ($article['validate'] !== 0 || $article['visible'] !== 0) : ?>
             <p class="text-danger">Veuillez d'abord dépublier et invalider l'article avant de le supprimer.</p>
         <?php else : ?>

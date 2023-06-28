@@ -1,12 +1,7 @@
 <?php $title = "Tableau de bord - " . ucfirst($host); ?>
 
 <?php ob_start(); ?>
-<h1>Tableau de bord</h1>
-<ul>
-    <li><a href="/administration/articles">Articles</a></li>
-    <li><a href="/administration/commentaires">Commentaires</a></li>
-</ul>
-<h2><a href="/">Retourner sur le site web</a></h2>
+<h1 class="mt-5 mb-3 text-center">Tableau de bord</h1>
 <?php $content = ob_get_clean(); ?>
 
 <?php require_once(__DIR__.'/layout.php'); ?>

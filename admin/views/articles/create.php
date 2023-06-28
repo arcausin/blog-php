@@ -1,16 +1,7 @@
 <?php $title = "Ajouter un article - " . ucfirst($host); ?>
 
 <?php ob_start(); ?>
-<h1>Tableau de bord</h1>
-<ul>
-    <li><a href="/administration/articles">Articles</a></li>
-    <li><a href="/administration/commentaires">Commentaires</a></li>
-</ul>
-<h2><a href="/">Retourner sur le site web</a></h2>
-<hr>
-<div class="mb-2">
-    <a href="/administration/articles">Retourner sur la liste des articles</a>
-</div>
+<p class="mb-3"><a class="text-dark" href="/administration">Tableau de bord</a> > <a class="text-dark" href="/administration/articles">Articles</a> > Ajouter</p>
 
 <?php if (isset($articleCreated)) : ?>
     <?php if ($articleCreated == false && !empty($message)) : ?>
@@ -24,20 +15,20 @@
     <?php endif ?>
 <?php endif ?>
 
-<h3 class="h3 mb-2">Ajouter un article</h3>
+<h3 class="h3 mb-3">Ajouter un article</h3>
 
 <form class="row g-3 mb-3" action="" method="post" enctype="multipart/form-data">
-    <div class="col-6">
+    <div class="col-12 col-md-6 mb-3">
         <label for="title">Titre</label>
         <input type="text" class="form-control" id="title" name="title" maxlength="255" placeholder="Titre de l'article" value="<?php if (!empty($titleArticle)) : ?><?= $titleArticle; ?><?php endif ?>" required>
     </div>
 
-    <div class="col-6">
+    <div class="col-12 col-md-6 mb-3">
         <label for="title">Slug</label>
         <input type="text" class="form-control" id="slug" name="slug" maxlength="255" placeholder="Slug de l'article" value="<?php if (!empty($slugArticle)) : ?><?= $slugArticle; ?><?php endif ?>" required>
     </div>
 
-    <div class="form-group">
+    <div class="form-group mb-3">
         <p class="mb-2">illustration de l'article</p>
         <div class="custom-file">
             <input type="hidden" name="MAX_FILE_SIZE" value="25000000"/>
@@ -46,17 +37,17 @@
         </div>
     </div>
 
-    <div class="col-6">
+    <div class="col-12 col-lg-6 mb-3">
         <label for="subtitle">Sous-titre</label>
         <textarea class="form-control" id="subtitle" name="subtitle"><?php if (!empty($subtitleArticle)) : ?><?= $subtitleArticle; ?><?php endif ?></textarea>
     </div>
 
-    <div class="col-6">
+    <div class="col-12 col-lg-6 mb-3">
         <label for="content">Contenu</label>
         <textarea class="form-control" id="content" name="content"><?php if (!empty($contentArticle)) : ?><?= $contentArticle; ?><?php endif ?></textarea>
     </div>
 
-    <div class="col- text-center">
+    <div class="col- text-center mb-3">
         <button type="submit" class="btn btn-primary" name="addArticleSubmit">Ajouter un article</button>
     </div>
 </form>
