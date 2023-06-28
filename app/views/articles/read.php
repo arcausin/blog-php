@@ -136,7 +136,7 @@ $title = $article['title'] . " - " . ucfirst($host); ?>
                 <div class="rounded-4 shadow p-3 mb-3">
                     <div class="row d-flex align-items-center">
                         <div class="col-4">
-                            <img src="/public/img/logo.svg" alt="Logo" class="img-fluid">
+                            <img src="/public/img/logo.png" alt="Logo" class="rounded-5 img-fluid">
                         </div>
 
                         <div class="col-8">

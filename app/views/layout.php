@@ -71,7 +71,7 @@
         <nav class="container-fluid navbar navbar-expand-md navbar-light bg-light">
             <div class="container">
                 <a class="navbar-brand d-flex align-items-center" href="/">
-                    <img src="/public/img/logo.svg" alt="Logo" width="46" height="36.65" class="d-inline-block align-text-top me-2">
+                    <img src="/public/img/logo.png" alt="Logo" width="50" height="25" class="rounded-5 d-inline-block align-text-top me-2">
                     <span>Alexis D'Ambrosio</span>
                 </a>
 
