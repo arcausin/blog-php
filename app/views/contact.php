@@ -55,7 +55,7 @@
                 </div>
 
                 <div class="col-12 mb-3">
-                    <label for="questionContact" class="form-label">Qui a formulé les trois lois de la robotique ?</label>
+                    <label for="questionContact" class="form-label">Qui a formulé les trois lois de la robotique ? <a class="text-decoration-none" href="https://www.google.com/search?&q=Qui+a+formul%C3%A9+les+trois+lois+de+la+robotique+%3F" target="_blank">Besoin d'aide ? <i class="fas fa-search"></i></a></label>
                     <select id="questionContact" name="questionContact" class="form-select" required>
                         <option selected>Choisissez la bonne réponse</option>
                         <option value="1">James Cameron</option>
