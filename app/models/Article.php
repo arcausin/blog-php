@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-require __DIR__ . '/../../config/database.php';
+require_once __DIR__ . '/../../config/database.php';
 
 class Article
 {
@@ -37,8 +37,22 @@ class Article
         $database = dbConnect();
 
         $statement = $database->prepare(
-            "SELECT * FROM articles ORDER BY creation_date DESC"
+            "SELECT * FROM articles WHERE validate = 1 AND visible = 1 ORDER BY creation_date DESC"
         );
+        $statement->execute();
+
+        return $statement->fetchAll();
+    }
+
+    public static function getLastArticles(string $slug, int $limit): array
+    {
+        $database = dbConnect();
+
+        $statement = $database->prepare(
+            "SELECT * FROM articles WHERE validate = 1 AND visible = 1 AND slug != :slug ORDER BY creation_date DESC LIMIT :limit"
+        );
+        $statement->bindParam(':slug', $slug, \PDO::PARAM_STR);
+        $statement->bindParam(':limit', $limit, \PDO::PARAM_INT);
         $statement->execute();
 
         return $statement->fetchAll();

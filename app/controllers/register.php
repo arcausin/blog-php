@@ -17,11 +17,17 @@ if (isset($_POST['createUserSubmit'])) {
     if (empty($pseudonym)) {
         $message = "Veuillez ajouter un pseudo";
         $userCreated = false;
+    } elseif (mb_strlen($pseudonym, 'UTF-8') > 32) {
+        $message = "Veuillez ajouter un pseudo avec un maximum de 32 caractères (actuellement ".mb_strlen($pseudonym, 'UTF-8').")";
+        $userCreated = false;
     } elseif (User::userPseudoExists($pseudonym) != 0) {
         $message = "Ce Pseudo est déjà utilisée";
         $userCreated = false;
     } elseif (empty($email)) {
         $message = "Veuillez ajouter une adresse mail";
+        $userCreated = false;
+    } elseif (mb_strlen($email, 'UTF-8') > 64) {
+        $message = "Veuillez ajouter une adresse mail avec un maximum de 64 caractères (actuellement ".mb_strlen($email, 'UTF-8').")";
         $userCreated = false;
     } elseif (User::userEmailExists($email) != 0) {
         $message = "Cette adresse mail est déjà utilisée";

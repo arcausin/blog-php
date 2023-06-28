@@ -48,6 +48,10 @@ if ($url[0] == 'administration') {
         require_once(__DIR__.'/admin/controllers/articles/delete.php');
     }
     
+    elseif (!empty($_SESSION['user']['role'] == 2) && $url[0] == 'administration' && $url[1] == 'commentaires' && empty($url[2])) {
+        require_once(__DIR__.'/admin/controllers/comments/index.php');
+    }
+    
     else {
         require_once(__DIR__.'/app/controllers/404.php');
     }

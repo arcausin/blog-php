@@ -5,31 +5,10 @@ use Admin\Functions;
  $title = $article['title'].'-'.ucfirst($host); ?>
 
 <?php ob_start(); ?>
-<h1>Tableau de bord</h1>
-<ul>
-    <li><a href="/administration/articles">Articles</a></li>
-    <li><a href="/administration/commentaires">Commentaires</a></li>
-</ul>
-<h2><a href="/">Retourner sur le site web</a></h2>
-<hr>
-<div class="mb-2">
-    <a href="/administration/articles">Retourner sur la liste des articles</a>
-</div>
+<p class="mb-3"><a class="text-dark" href="/administration">Tableau de bord</a> > <a class="text-dark" href="/administration/articles">Articles</a> > <?= $article['title']; ?></p>
 
 <div class="row">
-    <div class="col-8">
-        <h3 class="mb-3"><strong><?= $article['title']; ?></strong></h3>
-
-        <img class="shadow img-fluid w-100 rounded-4 mb-3" src="/public/img/articles/<?= $article['illustration']; ?>" alt="" style="filter: brightness(0.85);">
-
-        <p class="mb-3"><?= Functions::PrintContentArticle($article['subtitle']); ?></p>
-
-        <hr>
-
-        <p class="mb-3"><?= Functions::PrintContentArticle($article['content']); ?></p>
-    </div>
-
-    <div class="col-4">
+    <div class="col-12 col-lg-4">
         <div class="mb-3">
             <a class="d-inline-block btn btn-warning text-white" href="/administration/articles/modifier/<?= $article['slug']; ?>">
                 <i class="fas fa-edit"><span class="ms-1">Modifier</span></i>
@@ -65,6 +44,18 @@ use Admin\Functions;
                 <p class="mb-0">Mis à jour le : <?= Functions::creationDateLittleEndian($article['update_date']); ?></p>
             <?php } ?>
         </div>
+    </div>
+
+    <div class="col-12 col-lg-8">
+        <h3 class="mb-3"><strong><?= $article['title']; ?></strong></h3>
+
+        <img class="shadow img-fluid w-100 rounded-4 mb-3" src="/public/img/articles/<?= $article['illustration']; ?>" alt="" style="filter: brightness(0.85);">
+
+        <p class="mb-3"><?= Functions::PrintContentArticle($article['subtitle']); ?></p>
+
+        <hr>
+
+        <p class="mb-3"><?= Functions::PrintContentArticle($article['content']); ?></p>
     </div>
 </div>
 

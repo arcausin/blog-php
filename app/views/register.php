@@ -42,17 +42,6 @@
         <a class="btn btn-primary" href="/connexion">Se connecter</a>
     </div>
 </form>
-
-<hr>
-
-<nav>
-    <ul>
-        <li><a href="/">Accueil</a></li>
-        <li><a href="/a-propos">À Propos</a></li>
-        <li><a href="/articles">Articles</a></li>
-        <li><a href="/articles/read">Articles/Read</a></li>
-    </ul>
-</nav>
 <?php $content = ob_get_clean(); ?>
 
 <?php require_once(__DIR__.'/layout.php'); ?>

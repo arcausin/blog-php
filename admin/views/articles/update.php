@@ -5,16 +5,7 @@ use Admin\Functions;
 $title = "Ajouter un article - " . ucfirst($host); ?>
 
 <?php ob_start(); ?>
-<h1>Tableau de bord</h1>
-<ul>
-    <li><a href="/administration/articles">Articles</a></li>
-    <li><a href="/administration/commentaires">Commentaires</a></li>
-</ul>
-<h2><a href="/">Retourner sur le site web</a></h2>
-<hr>
-<div class="mb-2">
-    <a href="/administration/articles">Retourner sur la liste des articles</a>
-</div>
+<p class="mb-3"><a class="text-dark" href="/administration">Tableau de bord</a> > <a class="text-dark" href="/administration/articles">Articles</a> > <a class="text-dark" href="/administration/articles/<?= $article['slug']; ?>"><?= $article['title']; ?></a> > Modifier</p>
 
 <?php if (isset($articleUpdated)) : ?>
     <?php if ($articleUpdated == false && !empty($message)) : ?>
@@ -28,10 +19,10 @@ $title = "Ajouter un article - " . ucfirst($host); ?>
     <?php endif ?>
 <?php endif ?>
 
-<h3 class="mb-2">Modification de l'article <strong><?= $article['title']; ?></strong></h3>
+<h3 class="mb-3">Modification de l'article <strong><?= $article['title']; ?></strong></h3>
 
 <form class="row g-3 mb-3" action="" method="post" enctype="multipart/form-data">
-    <div class="col-6">
+    <div class="col-12 col-lg-6">
         <div class="mb-2">
             <label for="author">Auteur</label>
             <select class="custom-select" id="author" name="author" required>
@@ -44,7 +35,7 @@ $title = "Ajouter un article - " . ucfirst($host); ?>
             </select>
         </div>
         
-        <div class="mb-2">
+        <div class="mb-3">
             <p class="mb-0">Publication de l'article :</p>
             <div class="form-check">
                 <input class="form-check-input" type="checkbox" id="validate" name="validate" <?php if ($article['validate'] == 1) { ?>checked<?php } ?>>
@@ -56,19 +47,19 @@ $title = "Ajouter un article - " . ucfirst($host); ?>
             </div>
         </div>
 
-        <div class="mb-2">
+        <div class="mb-3">
             <label for="title">Titre <?php if (!empty($titleArticle) && $titleArticle !== $article['title']) : ?><span class="text-danger">(modification non enregistrée)</span><?php endif ?></label>
             <input type="text" class="form-control" id="title" name="title" maxlength="255" placeholder="Titre de l'article" value="<?php if (!empty($titleArticle)) { echo $titleArticle; } elseif (!empty($article['title'])) { echo $article['title']; } ?>" required>
         </div>
 
-        <div class="mb-2">
+        <div class="mb-3">
             <label for="title">Slug <?php if (!empty($slugArticle) && $slugArticle !== $article['slug']) : ?><span class="text-danger">(modification non enregistrée)</span><?php endif ?></label>
             <input type="text" class="form-control" id="slug" name="slug" maxlength="255" placeholder="Slug de l'article" value="<?php if (!empty($slugArticle)) { echo $slugArticle; } elseif (!empty($article['slug'])) { echo $article['slug']; } ?>" required>
         </div>
 
-        <div class="mb-2">
-            <p class="mb-2">illustration de l'article</p>
-            <img class="img-fluid w-100 rounded-4 mb-2" src="/public/img/articles/<?= $article['illustration']; ?>">
+        <div class="mb-3">
+            <p class="mb-3">illustration de l'article</p>
+            <img class="img-fluid w-100 rounded-4 mb-3" src="/public/img/articles/<?= $article['illustration']; ?>">
             <div class="custom-file">
                 <input type="hidden" name="MAX_FILE_SIZE" value="25000000"/>
                 <input type="file" class="custom-file-input" id="illustration" name="illustration">
@@ -77,19 +68,19 @@ $title = "Ajouter un article - " . ucfirst($host); ?>
         </div>
     </div>
 
-    <div class="col-6">
-        <div class="mb-2">
+    <div class="col-12 col-lg-6">
+        <div class="mb-3">
             <label for="subtitle">Sous-titre <?php if (!empty($subtitleArticle) && $subtitleArticle !== $article['subtitle']) : ?><span class="text-danger">(modification non enregistrée)</span><?php endif ?></label>
             <textarea class="form-control" id="subtitle" name="subtitle"><?php if (!empty($subtitleArticle)) { echo $subtitleArticle; } elseif (!empty($article['subtitle'])) { echo $article['subtitle']; } ?></textarea>
         </div>
 
-        <div class="mb-2">
+        <div class="mb-3">
             <label for="content">Contenu <?php if (!empty($contentArticle) && $contentArticle !== $article['content']) : ?><span class="text-danger">(modification non enregistrée)</span><?php endif ?></label>
             <textarea class="form-control" id="content" name="content"><?php if (!empty($contentArticle)) { echo $contentArticle; } elseif (!empty($article['content'])) { echo $article['content']; } ?></textarea>
         </div>
     </div>
 
-    <div class="col- text-center">
+    <div class="col- text-center mb-3">
         <button type="submit" class="btn btn-warning" name="updateArticleSubmit">Modifier l'article</button>
     </div>
 </form>
@@ -108,8 +99,8 @@ $title = "Ajouter un article - " . ucfirst($host); ?>
     language: 'fr_FR',
     encoding: "UTF-8",
     entity_encoding : "raw",
-    plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
-    toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
+    plugins: 'anchor autolink charmap code codesample emoticons image link lists media searchreplace table visualblocks wordcount',
+    toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat | code',
     height : 250,
     });
 
@@ -118,8 +109,8 @@ $title = "Ajouter un article - " . ucfirst($host); ?>
     language: 'fr_FR',
     encoding: "UTF-8",
     entity_encoding : "raw",
-    plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
-    toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
+    plugins: 'anchor autolink charmap code codesample emoticons image link lists media searchreplace table visualblocks wordcount',
+    toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat | code',
     });
 </script>
 
