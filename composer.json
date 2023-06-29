@@ -4,5 +4,10 @@
             "Admin\\": "admin/",
             "App\\": "app/"
         }
+    },
+    "require": {
+        "tinymce/tinymce": "^6.5",
+        "fortawesome/font-awesome": "5.15.4",
+        "twbs/bootstrap": "5.2.3"
     }
 }
