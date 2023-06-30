@@ -3,7 +3,7 @@
 use App\Models\Article;
 use App\Functions;
 
- $title = "Articles - " . ucfirst($host); ?>
+$title = "Articles - " . ucfirst($host); ?>
 
 <?php $description = "Retrouvez tous les articles du blog - ".ucfirst($host); ?>
 
