@@ -1,6 +1,3 @@
-<?php
-require_once(__DIR__.'/../../config/apiKeys.php');
-?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
