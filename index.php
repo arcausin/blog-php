@@ -25,30 +25,30 @@ if (substr($host, 0, 4) === 'www.') {
 $urlNative = "https://" . $host;
 
 if ($url[0] == 'administration') {
-    if (!empty($_SESSION['user']['role'] == 2) && $url[0] == 'administration' && empty($url[1])) {
+    if (isset($_SESSION['user']['role']) && !empty($_SESSION['user']['role'] == 2) && $url[0] == 'administration' && empty($url[1])) {
         require_once(__DIR__.'/admin/controllers/homepage.php');
     }
 
-    elseif (!empty($_SESSION['user']['role'] == 2) && $url[0] == 'administration' && $url[1] == 'articles' && empty($url[2])) {
+    elseif (isset($_SESSION['user']['role']) && !empty($_SESSION['user']['role'] == 2) && $url[0] == 'administration' && $url[1] == 'articles' && empty($url[2])) {
         require_once(__DIR__.'/admin/controllers/articles/index.php');
     }
-    elseif (!empty($_SESSION['user']['role'] == 2) && $url[0] == 'administration' && $url[1] == 'articles' && $url[2] == 'ajouter' && empty($url[3])) {
+    elseif (isset($_SESSION['user']['role']) && !empty($_SESSION['user']['role'] == 2) && $url[0] == 'administration' && $url[1] == 'articles' && $url[2] == 'ajouter' && empty($url[3])) {
         require_once(__DIR__.'/admin/controllers/articles/create.php');
     }
-    elseif (!empty($_SESSION['user']['role'] == 2) && $url[0] == 'administration' && $url[1] == 'articles' && !empty($url[2]) && empty($url[3])) {
+    elseif (isset($_SESSION['user']['role']) && !empty($_SESSION['user']['role'] == 2) && $url[0] == 'administration' && $url[1] == 'articles' && !empty($url[2]) && empty($url[3])) {
         $slug = $url[2];
         require_once(__DIR__.'/admin/controllers/articles/read.php');
     }
-    elseif (!empty($_SESSION['user']['role'] == 2) && $url[0] == 'administration' && $url[1] == 'articles' && $url[2] == 'modifier' && !empty($url[3]) && empty($url[4])) {
+    elseif (isset($_SESSION['user']['role']) && !empty($_SESSION['user']['role'] == 2) && $url[0] == 'administration' && $url[1] == 'articles' && $url[2] == 'modifier' && !empty($url[3]) && empty($url[4])) {
         $slug = $url[3];
         require_once(__DIR__.'/admin/controllers/articles/update.php');
     }
-    elseif (!empty($_SESSION['user']['role'] == 2) && $url[0] == 'administration' && $url[1] == 'articles' && $url[2] == 'supprimer' && !empty($url[3]) && empty($url[4])) {
+    elseif (isset($_SESSION['user']['role']) && !empty($_SESSION['user']['role'] == 2) && $url[0] == 'administration' && $url[1] == 'articles' && $url[2] == 'supprimer' && !empty($url[3]) && empty($url[4])) {
         $slug = $url[3];
         require_once(__DIR__.'/admin/controllers/articles/delete.php');
     }
     
-    elseif (!empty($_SESSION['user']['role'] == 2) && $url[0] == 'administration' && $url[1] == 'commentaires' && empty($url[2])) {
+    elseif (isset($_SESSION['user']['role']) && !empty($_SESSION['user']['role'] == 2) && $url[0] == 'administration' && $url[1] == 'commentaires' && empty($url[2])) {
         require_once(__DIR__.'/admin/controllers/comments/index.php');
     }
     
