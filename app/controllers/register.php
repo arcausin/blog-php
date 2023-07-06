@@ -55,6 +55,8 @@ if (isset($_POST['createUserSubmit'])) {
         
         if ($user->addUser()) {
             $userCreated = true;
+            $pseudonym = null;
+            $email = null;
         } else {
             $message = "Inconnue";
             $userCreated = false;

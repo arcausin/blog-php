@@ -16,15 +16,23 @@
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
+    <?php elseif ($userCreated == true && empty($message)) : ?>
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>Création du compte réussie !</strong><br/>
+            Veuillez cliquer sur le lien envoyé par mail pour confirmer votre inscription.
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
     <?php endif ?>
 <?php endif ?>
 
 <form class="row g-3 mb-3" action="" method="post">
     <div class="col-6">
-        <input type="text" class="form-control" id="pseudo" name="pseudo" maxlength="32" placeholder="Pseudo" value="<?php if (!empty($_POST['pseudo'])) : ?><?= $_POST['pseudo']; ?><?php endif ?>" required>
+        <input type="text" class="form-control" id="pseudo" name="pseudo" maxlength="32" placeholder="Pseudo" value="<?php if (!empty($pseudonym)) : ?><?= $pseudonym; ?><?php endif ?>" required>
     </div>
     <div class="col-6">
-        <input type="email" class="form-control" id="email" name="email" maxlength="64" placeholder="Adresse Mail" value="<?php if (!empty($_POST['email'])) : ?><?= $_POST['email']; ?><?php endif ?>" required>
+        <input type="email" class="form-control" id="email" name="email" maxlength="64" placeholder="Adresse Mail" value="<?php if (!empty($email)) : ?><?= $email; ?><?php endif ?>" required>
     </div>
 
     <div class="col-6">
